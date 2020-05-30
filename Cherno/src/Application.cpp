@@ -1,3 +1,4 @@
+/*master branch*/
 #include <GL/glew.h> /* glew before glfw because otherwise: error gl.h included before glew.h */
 #include <GLFW/glfw3.h>
 
