@@ -10,6 +10,7 @@
 #include "Renderer.h"
 #include "vertexBuffer.h"
 #include "indexBuffer.h"
+#include "vertexArray.h"
 /* Parse shader file into string */
 
 struct ShaderProgramSource
@@ -119,7 +120,7 @@ int main(void)
         std::cout << "glewInit error!!\n";
 
     std::cout << glGetString(GL_VERSION) << std::endl;
-    {
+    { /*this scope is used to prevent opengl error check infinite loop.*/
         float position[] = {
             -0.5f, -0.5f, // vertex 0
              0.5f, -0.5f, // 1
@@ -132,13 +133,16 @@ int main(void)
             2, 3, 0
         };
 
-        unsigned int vao;
-        GLCall(glGenVertexArrays(1, &vao));
-        GLCall(glBindVertexArray(vao));
+        //unsigned int vao;
+        //GLCall(glGenVertexArrays(1, &vao));
+        //GLCall(glBindVertexArray(vao));
 
-        VertexBuffer vb(position, 4 * 2 * sizeof(float)); /*Encapsulation day 1.*/
-        GLCall(glEnableVertexAttribArray(0));
-        GLCall(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0)); /* define an array of generic vertex attribute data, it also links current buffer with VAO. */
+        VertexArray va;
+        VertexBuffer vb(position, 4 * 2 * sizeof(float));
+        VertexBufferLayout layout;
+        layout.Push<float>(2);
+        va.AddBuffer(vb, layout);
+
         IndexBuffer ib(indices, 6); /*Encapsulation day 1.*/
 
         ShaderProgramSource source = ParseShader("res/shader/basic.shader");
@@ -167,7 +171,7 @@ int main(void)
             GLCall(glUseProgram(shader));
             GLCall(glUniform4f(location, r, g, b, 1.0f));
 
-            GLCall(glBindVertexArray(vao));
+            va.Bind();
             ib.Bind();
 
             GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr)); /* GL can only accept unsigned integer. You can put glDraw inside IndexBuffer, but it will be tricky to deal with complex models with different materials.*/

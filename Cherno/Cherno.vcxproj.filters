@@ -5,6 +5,7 @@
     <ClCompile Include="src\Renderer.cpp" />
     <ClCompile Include="src\vertexBuffer.cpp" />
     <ClCompile Include="src\indexBuffer.cpp" />
+    <ClCompile Include="src\vertexArray.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shader\basic.shader" />
@@ -13,5 +14,7 @@
     <ClInclude Include="src\Renderer.h" />
     <ClInclude Include="src\vertexBuffer.h" />
     <ClInclude Include="src\indexBuffer.h" />
+    <ClInclude Include="src\vertexArray.h" />
+    <ClInclude Include="src\vertexBufferLayout.h" />
   </ItemGroup>
 </Project>
