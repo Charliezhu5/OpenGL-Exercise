@@ -1,5 +1,5 @@
 #include "vertexArray.h"
-#include "Renderer.h"
+#include "GLerrorHandler.h"
 
 VertexArray::VertexArray()
 {

@@ -7,6 +7,7 @@
     <ClCompile Include="src\indexBuffer.cpp" />
     <ClCompile Include="src\vertexArray.cpp" />
     <ClCompile Include="src\shader.cpp" />
+    <ClCompile Include="src\GLerrorHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shader\basic.shader" />
@@ -18,5 +19,7 @@
     <ClInclude Include="src\vertexArray.h" />
     <ClInclude Include="src\vertexBufferLayout.h" />
     <ClInclude Include="src\shader.h" />
+    <ClInclude Include="src\GLerrorHandler.h" />
+    <ClInclude Include="src\vendor\stb_image\stb_image.h" />
   </ItemGroup>
 </Project>

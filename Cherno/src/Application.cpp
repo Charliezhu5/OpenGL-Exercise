@@ -7,6 +7,7 @@
 #include <string>
 #include <sstream>
 
+#include "GLerrorHandler.h"
 #include "Renderer.h"
 #include "vertexBuffer.h"
 #include "indexBuffer.h"
@@ -69,6 +70,8 @@ int main(void)
         ib.Unbind();
         shader.Unbind();
 
+        Renderer renderer;
+
         float r = 0.0f;
         float g = 0.0f;
         float b = 1.0f;
@@ -77,14 +80,12 @@ int main(void)
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window))
         {
-            glClear(GL_COLOR_BUFFER_BIT);
+            renderer.Clear();
             
             shader.Bind();
             shader.SetUniform4f("u_Color", r, g, b, 1.0f);
-            va.Bind();
-            ib.Bind();
-
-            GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr)); /* GL can only accept unsigned integer. You can put glDraw inside IndexBuffer, but it will be tricky to deal with complex models with different materials.*/
+            
+            renderer.Draw(va, ib, shader);
 
             if (r > 1.0f)
                 increment = -0.03f;

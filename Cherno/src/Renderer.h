@@ -1,12 +1,13 @@
 #pragma once
-#include <GL/glew.h>
+#include "GLerrorHandler.h"
 
-#define ASSERT(x) if (!(x)) __debugbreak();
-#define GLCall(x) GLClearError();\
-    x;\
-    ASSERT(GLLogCall(#x, __FILE__, __LINE__))
+#include "vertexArray.h"
+#include "indexBuffer.h"
+#include "shader.h"
 
-/* Error handling in OpenGL, some functions. The working pipeline is clear the error by looping first, then retrieve error after each GL function.*/
-void GLClearError();
-
-bool GLLogCall(const char* function, const char* file, int line);
+class Renderer
+{
+public:
+    void Clear() const;
+    void Draw(const VertexArray& va, const IndexBuffer& ib, const Shader& shader) const;
+};
