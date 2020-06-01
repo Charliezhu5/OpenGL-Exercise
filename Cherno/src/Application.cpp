@@ -13,6 +13,7 @@
 #include "indexBuffer.h"
 #include "vertexArray.h"
 #include "shader.h"
+#include "texture.h"
 
 int main(void)
 {
@@ -23,7 +24,7 @@ int main(void)
         return -1;
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
+    window = glfwCreateWindow(480, 640, "Hello World", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -41,10 +42,10 @@ int main(void)
     std::cout << glGetString(GL_VERSION) << std::endl;
     { /*this scope is used to prevent opengl error check infinite loop.*/
         float position[] = {
-            -0.5f, -0.5f, // vertex 0
-             0.5f, -0.5f, // 1
-             0.5f,  0.5f, // 2
-            -0.5f,  0.5f, // 3
+            -0.5f, -0.5f,  0.0f,  0.0f,     // vertex 0 with texture coordinates now.
+             0.5f, -0.5f,  1.0f,  0.0f,     // 1
+             0.5f,  0.5f,  1.0f,  1.0f,     // 2
+            -0.5f,  0.5f,  0.0f,  1.0f      // 3
         };
 
         unsigned int indices[] = {
@@ -52,10 +53,14 @@ int main(void)
             2, 3, 0
         };
 
+        /*Enable blending*/
+        GLCall(glEnable(GL_BLEND));
+        GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
         
         VertexArray va;
-        VertexBuffer vb(position, 4 * 2 * sizeof(float));
+        VertexBuffer vb(position, 4 * 4 * sizeof(float));
         VertexBufferLayout layout;
+        layout.Push<float>(2);
         layout.Push<float>(2);
         va.AddBuffer(vb, layout);
 
@@ -64,6 +69,10 @@ int main(void)
         Shader shader("res/shader/basic.shader");
         shader.Bind();
         shader.SetUniform4f("u_Color", 0.0f, 0.0f, 0.0f, 1.0f);
+
+        Texture texture("res/texture/texture.png");
+        texture.Bind();
+        shader.SetUniform1i("u_Texture", 0); /*this integer needs to match texture.Bind(int), to find texture to correct slot.*/
 
         va.Unbind();
         vb.Unbind();
