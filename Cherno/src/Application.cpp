@@ -15,6 +15,9 @@
 #include "shader.h"
 #include "texture.h"
 
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+
 int main(void)
 {
     GLFWwindow* window;
@@ -24,7 +27,7 @@ int main(void)
         return -1;
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(480, 640, "Hello World", NULL, NULL);
+    window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -66,9 +69,13 @@ int main(void)
 
         IndexBuffer ib(indices, 6);
 
+        /*create projection matrix.*/
+        glm::mat4 proj = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, -1.0f, 1.0f);
+
+
         Shader shader("res/shader/basic.shader");
         shader.Bind();
-        shader.SetUniform4f("u_Color", 0.0f, 0.0f, 0.0f, 1.0f);
+        shader.SetUniformMat4f("u_MVP", proj);
 
         Texture texture("res/texture/texture.png");
         texture.Bind();
@@ -81,29 +88,14 @@ int main(void)
 
         Renderer renderer;
 
-        float r = 0.0f;
-        float g = 0.0f;
-        float b = 1.0f;
-        float increment = 0.01f;
-
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window))
         {
             renderer.Clear();
             
             shader.Bind();
-            shader.SetUniform4f("u_Color", r, g, b, 1.0f);
             
             renderer.Draw(va, ib, shader);
-
-            if (r > 1.0f)
-                increment = -0.03f;
-            if (r < 0.0f)
-                increment = 0.03f;
-
-            r += increment;
-            b -= increment;
-            g = r;
 
             /* Swap front and back buffers */
             glfwSwapBuffers(window);
