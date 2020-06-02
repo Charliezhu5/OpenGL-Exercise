@@ -27,7 +27,9 @@ int main(void)
         return -1;
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
+    float window_width = 1366.0f;
+    float window_height = 768.0f;
+    window = glfwCreateWindow(window_width, window_height, "Hello World", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -45,10 +47,10 @@ int main(void)
     std::cout << glGetString(GL_VERSION) << std::endl;
     { /*this scope is used to prevent opengl error check infinite loop.*/
         float position[] = {
-            -0.5f, -0.5f,  0.0f,  0.0f,     // vertex 0 with texture coordinates now.
-             0.5f, -0.5f,  1.0f,  0.0f,     // 1
-             0.5f,  0.5f,  1.0f,  1.0f,     // 2
-            -0.5f,  0.5f,  0.0f,  1.0f      // 3
+             0.0f,  0.0f,  0.0f,  0.0f,     // vertex 0 with texture coordinates now.
+             240.0f,  0.0f,  1.0f,  0.0f,     // 1
+             240.0f,  424.6f,  1.0f,  1.0f,     // 2
+             0.0f,  424.6f,  0.0f,  1.0f      // 3
         };
 
         unsigned int indices[] = {
@@ -69,13 +71,16 @@ int main(void)
 
         IndexBuffer ib(indices, 6);
 
-        /*create projection matrix.*/
-        glm::mat4 proj = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, -1.0f, 1.0f);
+        /*create projection view model matrices.*/
+        glm::mat4 proj = glm::ortho(0.0f, window_width, 0.0f, window_height, -1.0f, 1.0f); /*it's like 4 bundaries of window?*/
+        glm::mat4 view = glm::translate(glm::mat4(1.0f),glm::vec3(100, 0, 0));
+        glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(300, 150, 0));
 
+        glm::mat4 mvp = proj * view * model;
 
         Shader shader("res/shader/basic.shader");
         shader.Bind();
-        shader.SetUniformMat4f("u_MVP", proj);
+        shader.SetUniformMat4f("u_MVP", mvp);
 
         Texture texture("res/texture/texture.png");
         texture.Bind();
@@ -92,7 +97,7 @@ int main(void)
         while (!glfwWindowShouldClose(window))
         {
             renderer.Clear();
-            
+
             shader.Bind();
             
             renderer.Draw(va, ib, shader);
