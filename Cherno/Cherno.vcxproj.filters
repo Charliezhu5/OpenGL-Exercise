@@ -17,6 +17,7 @@
     <ClCompile Include="src\vendor\imGUI\imgui_widgets.cpp" />
     <ClCompile Include="src\vendor\imGUI\imgui_impl_opengl3.cpp" />
     <ClCompile Include="src\vendor\imGUI\imgui_impl_glfw.cpp" />
+    <ClCompile Include="src\test\testClearColor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shader\basic.shader" />
@@ -457,5 +458,7 @@
     <ClInclude Include="src\vendor\imGUI\imstb_truetype.h" />
     <ClInclude Include="src\vendor\imGUI\imgui_impl_opengl3.h" />
     <ClInclude Include="src\vendor\imGUI\imgui_impl_glfw.h" />
+    <ClInclude Include="src\test\test.h" />
+    <ClInclude Include="src\test\testClearColor.h" />
   </ItemGroup>
 </Project>
