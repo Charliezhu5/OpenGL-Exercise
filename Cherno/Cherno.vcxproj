@@ -163,6 +163,7 @@
     <ClCompile Include="src\indexBuffer.cpp" />
     <ClCompile Include="src\Renderer.cpp" />
     <ClCompile Include="src\shader.cpp" />
+    <ClCompile Include="src\test\test.cpp" />
     <ClCompile Include="src\test\testClearColor.cpp" />
     <ClCompile Include="src\texture.cpp" />
     <ClCompile Include="src\vendor\glm\detail\glm.cpp" />
