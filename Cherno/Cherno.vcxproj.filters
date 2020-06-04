@@ -19,6 +19,7 @@
     <ClCompile Include="src\vendor\imGUI\imgui_impl_glfw.cpp" />
     <ClCompile Include="src\test\testClearColor.cpp" />
     <ClCompile Include="src\test\test.cpp" />
+    <ClCompile Include="src\test\test2DTexture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shader\basic.shader" />
@@ -461,5 +462,7 @@
     <ClInclude Include="src\vendor\imGUI\imgui_impl_glfw.h" />
     <ClInclude Include="src\test\test.h" />
     <ClInclude Include="src\test\testClearColor.h" />
+    <ClInclude Include="src\test\test2DTexture.h" />
+    <ClInclude Include="src\screen.h" />
   </ItemGroup>
 </Project>

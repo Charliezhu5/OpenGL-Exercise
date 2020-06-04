@@ -22,6 +22,11 @@
 #include "imGUI/imgui_impl_glfw.h"
 #include "imGUI/imgui_impl_opengl3.h"
 #include "test/testClearColor.h"
+#include "test/test2DTexture.h"
+
+#include "screen.h"
+float window_width = 1920.0f;
+float window_height = 1080.0f;
 
 int main(void)
 {
@@ -32,8 +37,7 @@ int main(void)
         return -1;
 
     /* Create a windowed mode window and its OpenGL context */
-    float window_width = 1600.0f;
-    float window_height = 900.0f;
+    
     window = glfwCreateWindow(window_width, window_height, "Hello World", NULL, NULL);
     if (!window)
     {
@@ -70,6 +74,7 @@ int main(void)
 
         /*initialize a test in menu*/
         testmenu->RegisterTest<test::TestClearColor>("Clear Color");
+        testmenu->RegisterTest<test::Test2D>("2D Textures w/Slider");
 
         while (!glfwWindowShouldClose(window))
         {

@@ -164,6 +164,7 @@
     <ClCompile Include="src\Renderer.cpp" />
     <ClCompile Include="src\shader.cpp" />
     <ClCompile Include="src\test\test.cpp" />
+    <ClCompile Include="src\test\test2DTexture.cpp" />
     <ClCompile Include="src\test\testClearColor.cpp" />
     <ClCompile Include="src\texture.cpp" />
     <ClCompile Include="src\vendor\glm\detail\glm.cpp" />
@@ -320,8 +321,10 @@
     <ClInclude Include="src\GLerrorHandler.h" />
     <ClInclude Include="src\indexBuffer.h" />
     <ClInclude Include="src\Renderer.h" />
+    <ClInclude Include="src\screen.h" />
     <ClInclude Include="src\shader.h" />
     <ClInclude Include="src\test\test.h" />
+    <ClInclude Include="src\test\test2DTexture.h" />
     <ClInclude Include="src\test\testClearColor.h" />
     <ClInclude Include="src\texture.h" />
     <ClInclude Include="src\vendor\glm\common.hpp" />
