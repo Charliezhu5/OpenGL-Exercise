@@ -20,6 +20,7 @@
     <ClCompile Include="src\test\testClearColor.cpp" />
     <ClCompile Include="src\test\test.cpp" />
     <ClCompile Include="src\test\test2DTexture.cpp" />
+    <ClCompile Include="src\test\testDancingJoker.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shader\basic.shader" />
@@ -461,8 +462,9 @@
     <ClInclude Include="src\vendor\imGUI\imgui_impl_opengl3.h" />
     <ClInclude Include="src\vendor\imGUI\imgui_impl_glfw.h" />
     <ClInclude Include="src\test\test.h" />
-    <ClInclude Include="src\test\testClearColor.h" />
     <ClInclude Include="src\test\test2DTexture.h" />
     <ClInclude Include="src\screen.h" />
+    <ClInclude Include="src\test\testClearColor.h" />
+    <ClInclude Include="src\test\testDancingJoker.h" />
   </ItemGroup>
 </Project>

@@ -21,8 +21,10 @@
 #include "imGUI/imgui.h"
 #include "imGUI/imgui_impl_glfw.h"
 #include "imGUI/imgui_impl_opengl3.h"
+
 #include "test/testClearColor.h"
 #include "test/test2DTexture.h"
+#include "test/testDancingJoker.h"
 
 #include "screen.h"
 float window_width = 1920.0f;
@@ -75,6 +77,7 @@ int main(void)
         /*initialize a test in menu*/
         testmenu->RegisterTest<test::TestClearColor>("Clear Color");
         testmenu->RegisterTest<test::Test2D>("2D Textures w/Slider");
+        testmenu->RegisterTest < test::TestDancingJoker>("Dancing Joker");
 
         while (!glfwWindowShouldClose(window))
         {
